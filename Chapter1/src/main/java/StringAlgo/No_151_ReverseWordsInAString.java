@@ -21,7 +21,7 @@ package StringAlgo;
  */
 public class No_151_ReverseWordsInAString {
     public static void main(String[] args) {
-        String s = " the sky is blue ";
+        String s = " the sky is blue   ";
         System.out.println(reverseWords(s));
     }
 
@@ -33,29 +33,28 @@ public class No_151_ReverseWordsInAString {
             if (chars[i] == ' ') {
                 continue;
             }
-
             //反转每一个单词
             int begin = i;
             while (i < chars.length && chars[i] != ' ') {
                 i++;
             }
             reverseChar(chars, begin, i - 1);
+            if (slow != 0){
+                chars[slow] = ' ';
+                slow++;
+            }
 
             for (int j = begin; j < i; j++) {
                 chars[slow] = chars[j];
                 slow++;
             }
 
-            if (i != chars.length){
-                chars[slow] = ' ';
-                slow++;
-            }
+
         }
-        int end =  chars[slow - 1] == ' ' ? slow - 1 : slow;
 
 
 
-        return new String(chars,0,end);
+        return new String(chars,0,slow);
     }
 
     public static void reverseChar(char[] s, int begin, int end) {
