@@ -1,7 +1,11 @@
 package TreeAlgo;
 
+import java.util.ArrayDeque;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * 给定一个二叉树，找出其最大深度。
@@ -17,8 +21,14 @@ public class No_104_MaximumDepthOfBinaryTree {
         root.right = new TreeNode(20);
         root.right.left = new TreeNode(15);
         root.right.right = new TreeNode(7);
-        System.out.println(maxDepth(root));
+        System.out.println(maxDepth2(root));
     }
+
+    /**
+     * 迭代法
+     * @param root
+     * @return
+     */
     public static int maxDepth(TreeNode root) {
         int deep = 0;
         if (root == null){
@@ -44,4 +54,27 @@ public class No_104_MaximumDepthOfBinaryTree {
 
         return deep;
     }
+
+    /*
+    递归法
+     */
+    public static int maxDepth2(TreeNode root) {
+        // 退出递归条件
+        if (root == null){
+            return 0;
+        }
+        // 单层逻辑
+        int left = maxDepth2(root.left);
+        int right = maxDepth2(root.right);
+        // 当前的深度
+        int deep = Math.max(left,right) + 1;
+
+        return deep;
+
+
+
+
+    }
+
+
 }
